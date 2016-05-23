@@ -1,5 +1,12 @@
 {
-  "loopback-component-explorer": {
-    "mountPath": "/explorer"
-  }
+	"loopback-component-explorer": {
+		"mountPath": "/explorer"
+	},
+	"loopback-component-bunyan": {
+		"name": "asset_manager",
+		"streams": [
+			{"type": "prettystream"},
+			{"type": "logsene"}
+		]
+	}
 }

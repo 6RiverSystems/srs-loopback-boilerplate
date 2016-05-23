@@ -1,11 +1,13 @@
 'use strict';
+
 let loopback = require('loopback');
 let boot = require('loopback-boot');
 
-let log = require('./utils/logger')('Server');
 let app = module.exports = loopback();
 
 app.start = function(cb) {
+	let log = app.logger('Server');
+
 	// start the web server
 	return app.listen(function() {
 		app.emit('started');
