@@ -2,7 +2,7 @@ machine:
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   node:
-    version: 5.7.1
+    version: 6.2.1
   services:
     - docker
   environment:
@@ -14,7 +14,9 @@ dependencies:
 
 test:
   pre:
-    - mkdir -p $CIRCLE_TEST_REPORTS/junit
+    - mkdir -p $CIRCLE_TEST_REPORTS/mocha
+  override:
+    - npm test
   post:
     - mv coverage $CIRCLE_TEST_REPORTS
 
