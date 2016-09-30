@@ -7,7 +7,7 @@
   "author": "jbcpollak <josh@6river.com> (http://6river.com/)",
   "main": "server/server.js",
   "engines": {
-    "node": "5.7.1",
+    "node": "6.2.1",
     "npm": "3.7.2"
   },
   "scripts": {
