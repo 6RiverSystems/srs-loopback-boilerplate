@@ -7,6 +7,7 @@ machine:
     - docker
   environment:
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
+    MOCHA_OPTS: --reporter mocha-junit-reporter --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/mocha/junit.xml
 
 dependencies:
   pre:
