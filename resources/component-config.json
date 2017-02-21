@@ -3,11 +3,11 @@
 		"mountPath": "/explorer"
 	},
 	"loopback-component-bunyan": {
-		"name": "asset_manager",
+		"name": "unconfigured_boilerplate",
 		"streams": [
 			{"type": "prettystream"},
-			{"type": "logsene"}
-		],
-		"level": "debug"
+			{"type": "logsene"},
+			{"type": "logdna"}
+		]
 	}
 }
