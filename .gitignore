@@ -13,6 +13,11 @@
 .DS_Store
 .project
 .strong-pm
-coverage
-node_modules
 npm-debug.log
+.idea/
+
+# Resource directories
+node_modules
+coverage
+dist-test
+dist

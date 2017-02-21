@@ -2,31 +2,38 @@ machine:
   pre:
     - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
   node:
-    version: 6.2.1
+    version: 7.4.0
   services:
     - docker
   environment:
+    MOCHA_OPTS: --reporter mocha-junit-reporter --reporter-options mochaFile=$CIRCLE_TEST_REPORTS/mocha/junit.xml
     DATABASE_URL: postgres://ubuntu:@127.0.0.1:5432/circle_test
 
 dependencies:
   pre:
-    - npm update -g npm
+    - ./scripts/setupNpm.sh
 
 test:
   pre:
-    - mkdir -p $CIRCLE_TEST_REPORTS/mocha
-  override:
-    - npm test
-  post:
-    - mv coverage $CIRCLE_TEST_REPORTS
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit
+  #post:
+    #- mv coverage $CIRCLE_TEST_REPORTS
 
 deployment:
   staging:
     branch: develop
     commands:
-      - make gcloud_deploy
+      - CLUSTER=staging NAMESPACE=staging make gcloud_deploy
   demo:
     branch: master
     commands:
-      - make gcloud_deploy
+      - CLUSTER=demo make gcloud_deploy
+  barrett:
+    branch: barrett
+    commands:
+      - CLUSTER=barrett make gcloud_deploy
+  hbc:
+    branch: hbc
+    commands:
+      - CLUSTER=barrett make gcloud_deploy
 

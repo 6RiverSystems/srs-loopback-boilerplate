@@ -1,0 +1,36 @@
+{
+	"compileOnSave": true,
+	"compilerOptions": {
+		"outDir": "dist",
+		"target": "es6",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"allowJs": true,
+		"allowUnreachableCode": false,
+		"sourceMap": true,
+		"declaration": false,
+		"forceConsistentCasingInFileNames": true,
+		"removeComments": false,
+		"preserveConstEnums": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"types": [
+			"node",
+			"reflect-metadata"
+		],
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"lib": [
+			"es2016",
+			"dom"
+		]
+	},
+	"exclude": [
+		"node_modules",
+		"scripts",
+		"coverage",
+		"dist",
+		"dist-test",
+		"test"
+	]
+}
