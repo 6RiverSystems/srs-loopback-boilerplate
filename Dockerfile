@@ -1,36 +1,32 @@
-FROM node:6
+FROM node:7.4.0
 MAINTAINER Nick Chistyakov "nick@6river.com"
-ENV RELEASED_AT 2016-05-03
+ENV RELEASED_AT 2017-02-22
 
-ENV NODE_ENV production
-ENV WFM_URL "http://wfm/v1"
-ENV AM_URL "http://am/v1"
+# Node settings
 ENV NODE_PATH "$NODE_PATH:./"
+ENV NODE_ENV production
 
-# Declare build arguments
-ARG GIT_SSH_KEY
+# Pusher settings
+ENV PUSHER_APP_ID "Your App ID"
+ENV PUSHER_KEY "Your Key"
+ENV PUSHER_SECRET "Your Secret"
+ENV PUSHER_API_HOST "api.pusherapp.com"
+ENV PUSHER_API_PORT 443
+ENV PUSHER_API_SCHEME https
 
-RUN mkdir -p /root/.ssh
+# External API urls
+ENV WFM_URL "http://wm/v1"
+ENV TC_URL "http://tc/v1"
+ENV AM_URL "http://am/v1"
+ENV MM_URL "http://map/v1"
 
-# Import private key from environment variable
-RUN echo $GIT_SSH_KEY | base64 --decode > /root/.ssh/id_rsa
-# Make private key as read only
-RUN chmod 400 /root/.ssh/id_rsa
-# Create known_hosts
-RUN touch /root/.ssh/known_hosts
-# Add bitbuckets key
-RUN ssh-keyscan github.com >> /root/.ssh/known_hosts
+ENV LOGSENE_TOKEN ""
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/
-RUN npm install
-
-# Removing deploy SSH keys
-RUN rm -rf /root/.ssh
-
 COPY . /usr/src/app
+RUN npm rebuild
 
 CMD ["node", "."]
 
