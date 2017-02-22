@@ -7,6 +7,7 @@ VERSION = $(shell git describe --long --tags --dirty --always)
 # GCE Project ID
 GCLOUD_PROJECT ?= plasma-column-128721
 GCLOUD_COMPUTE_ZONE ?= us-central1-a
+export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/client-secret.json
 
 # CLUSTER
 CLUSTER ?= staging
@@ -67,6 +68,11 @@ gcloud_config: check_gcloud_env
 	@sudo /opt/google-cloud-sdk/bin/gcloud --quiet components install kubectl
 	@sudo chmod 757 /home/ubuntu/.config/gcloud/logs -R
 	@sudo chown -R ubuntu:ubuntu /home/ubuntu/.config/gcloud
+
+	# In the future, this should work instead of exporting
+	# see: https://cloud.google.com/sdk/gcloud/reference/beta/auth/application-default/login
+	# @gcloud beta auth application-default login --client-id-file=${HOME}/client-secret.json
+
 	@gcloud auth activate-service-account --key-file ${HOME}/client-secret.json
 	@gcloud config set project $(GCLOUD_PROJECT)
 	@gcloud config set compute/zone $(GCLOUD_COMPUTE_ZONE)

@@ -29,4 +29,3 @@ COPY . /usr/src/app
 RUN npm rebuild
 
 CMD ["node", "."]
-
