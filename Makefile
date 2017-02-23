@@ -7,6 +7,7 @@ VERSION = $(shell git describe --long --tags --dirty --always)
 # GCE Project ID
 GCLOUD_PROJECT ?= plasma-column-128721
 GCLOUD_COMPUTE_ZONE ?= us-central1-a
+DEPLOYMENT ?= $(NAME)
 export GOOGLE_APPLICATION_CREDENTIALS=${HOME}/client-secret.json
 
 # CLUSTER
